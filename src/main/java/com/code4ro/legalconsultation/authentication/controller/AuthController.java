@@ -5,7 +5,6 @@ import com.code4ro.legalconsultation.authentication.model.dto.LoginRequest;
 import com.code4ro.legalconsultation.authentication.model.dto.SignUpRequest;
 import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.authentication.service.ApplicationUserService;
-import com.code4ro.legalconsultation.core.exception.LegalValidationException;
 import com.code4ro.legalconsultation.core.model.dto.ApiResponse;
 import com.code4ro.legalconsultation.security.jwt.JwtTokenProvider;
 import io.swagger.annotations.ApiOperation;
@@ -71,7 +70,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> registerUser(
             @ApiParam("Object containing the sign-up request DTO") @Valid @RequestBody SignUpRequest signUpRequest)
-            throws LegalValidationException {
+            {
         final ApplicationUser result = userService.save(signUpRequest);
 
         URI location = ServletUriComponentsBuilder

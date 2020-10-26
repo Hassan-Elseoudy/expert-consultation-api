@@ -39,7 +39,7 @@ public class ApplicationUserService {
 
     @Transactional
     @CachePut(cacheNames = "users")
-    public ApplicationUser save(SignUpRequest signUpRequest) throws LegalValidationException {
+    public ApplicationUser save(SignUpRequest signUpRequest) {
         if (applicationUserRepository.existsByUsername(signUpRequest.getUsername())) {
             throw LegalValidationException.builder()
                     .i18nFieldErrors(Map.of("username", new I18nError("register.Duplicate.username")))

@@ -31,8 +31,8 @@ public final class CommentFactory {
         return commentService.create(nodeId, create());
     }
 
-    public CommentDetailDto saveReply(final UUID parentId) {
-        return commentService.createReply(parentId, create());
+    public void saveReply(final UUID parentId) {
+        commentService.createReply(parentId, create());
     }
 
     public Comment createEntity() {

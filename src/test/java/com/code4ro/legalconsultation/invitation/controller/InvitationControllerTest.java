@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -37,7 +38,7 @@ public class InvitationControllerTest extends AbstractControllerIntegrationTest 
     @WithMockUser
     @Transactional
     public void testGetUsedInvitation() throws Exception {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
         final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.USED);
@@ -51,7 +52,7 @@ public class InvitationControllerTest extends AbstractControllerIntegrationTest 
     @WithMockUser
     @Transactional
     public void testGetExpiredInvitation() throws Exception {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
         final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.EXPIRED);
@@ -65,7 +66,7 @@ public class InvitationControllerTest extends AbstractControllerIntegrationTest 
     @WithMockUser
     @Transactional
     public void testGetInvitation() throws Exception {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
         final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.PENDING);

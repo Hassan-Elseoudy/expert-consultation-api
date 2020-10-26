@@ -29,6 +29,7 @@ import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -58,7 +59,7 @@ public class CommentServiceTest {
 
     @Before
     public void before() {
-        currentUser = RandomObjectFiller.createAndFill(ApplicationUser.class);
+        currentUser = Objects.requireNonNull(RandomObjectFiller.createAndFill(ApplicationUser.class));
         currentUser.getUser().setRole(UserRole.ADMIN);
         when(currentUserService.getCurrentUser()).thenReturn(currentUser);
     }
@@ -83,7 +84,7 @@ public class CommentServiceTest {
     @Test
     public void update() {
         final UUID id = UUID.randomUUID();
-        final CommentDto commentDto = RandomObjectFiller.createAndFill(CommentDto.class);
+        final CommentDto commentDto = Objects.requireNonNull(RandomObjectFiller.createAndFill(CommentDto.class));
         final Comment comment = new Comment();
         when(commentRepository.findById(id)).thenReturn(Optional.of(comment));
 
@@ -189,8 +190,8 @@ public class CommentServiceTest {
         Page<Comment> all = commentService.findAllReplies(parentId, pageable);
 
         //then
-        assertEquals("response size should be 1", all.getContent().size(), 1L);
-        assertEquals("text is different", all.getContent().get(0).getText(), text);
+        assertEquals("response size should be 1", 1L, all.getContent().size());
+        assertEquals("text is different", text, all.getContent().get(0).getText());
     }
 
     @Test

@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ public class InvitationServiceTest {
 
     @Test
     public void testGetValidInvitation() {
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setStatus(InvitationStatus.PENDING);
 
         when(invitationRepository.findByCode(any())).thenReturn(Optional.of(invitation));
@@ -58,7 +59,7 @@ public class InvitationServiceTest {
 
     @Test
     public void testGetInvitationWhichIsNotPending() {
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setStatus(InvitationStatus.USED);
 
         when(invitationRepository.findByCode(any())).thenReturn(Optional.of(invitation));
@@ -82,7 +83,7 @@ public class InvitationServiceTest {
 
     @Test
     public void testMarkInvitationAsUsed() {
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setStatus(InvitationStatus.PENDING);
 
         when(invitationRepository.findByCode(any())).thenReturn(Optional.of(invitation));
@@ -113,8 +114,8 @@ public class InvitationServiceTest {
 
     @Test
     public void testCheckUsedInvitation() {
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setStatus(InvitationStatus.USED);
 
         when(invitationRepository.findByCode(any())).thenReturn(Optional.of(invitation));
@@ -126,8 +127,8 @@ public class InvitationServiceTest {
 
     @Test
     public void testCheckExpiredInvitation() {
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setStatus(InvitationStatus.EXPIRED);
 
         when(invitationRepository.findByCode(any())).thenReturn(Optional.of(invitation));
@@ -139,8 +140,8 @@ public class InvitationServiceTest {
 
     @Test
     public void testCheckEmailMissmatch() {
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setStatus(InvitationStatus.PENDING);
 
         when(invitationRepository.findByCode(any())).thenReturn(Optional.of(invitation));
@@ -152,9 +153,9 @@ public class InvitationServiceTest {
 
     @Test
     public void testCheckValidInvitation() {
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setStatus(InvitationStatus.PENDING);
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
         signUpRequest.setEmail(invitation.getUser().getEmail());
 
         when(invitationRepository.findByCode(any())).thenReturn(Optional.of(invitation));

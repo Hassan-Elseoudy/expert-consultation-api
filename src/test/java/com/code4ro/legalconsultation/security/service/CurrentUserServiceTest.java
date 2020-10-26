@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Objects;
+
 import static org.mockito.Mockito.*;
 
 
@@ -27,7 +29,7 @@ public class CurrentUserServiceTest {
 
     @Test
     public void getCurrentUser() {
-        final ApplicationUser applicationUser = RandomObjectFiller.createAndFill(ApplicationUser.class);
+        final ApplicationUser applicationUser = Objects.requireNonNull(RandomObjectFiller.createAndFill(ApplicationUser.class));
         final SecurityContext securityContext = mock(SecurityContext.class);
         final Authentication authentication = mock(Authentication.class);
         final CurrentUser currentuser = CurrentUser.create(applicationUser);

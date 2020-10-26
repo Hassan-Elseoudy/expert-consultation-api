@@ -24,10 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -42,7 +39,7 @@ public class UserServiceTest {
     private MailService mailService;
     @Mock
     private InvitationService invitationService;
-    private UserMapper mapperService = new UserMapperImpl();
+    private final UserMapper mapperService = new UserMapperImpl();
 
     private UserService userService;
 
@@ -108,7 +105,7 @@ public class UserServiceTest {
 
     @Test
     public void extractExistingUsersFromCsv() throws IOException {
-        final User user = RandomObjectFiller.createAndFill(User.class);
+        final User user = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
         user.setEmail("john@email.com");
 
         final MultipartFile file = mock(MultipartFile.class);
@@ -126,7 +123,7 @@ public class UserServiceTest {
 
     @Test
     public void extractNewUsersFromCsv() throws IOException {
-        final User user = RandomObjectFiller.createAndFill(User.class);
+        final User user = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
         user.setEmail("john@email.com");
         user.setId(null);
 

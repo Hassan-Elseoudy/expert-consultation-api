@@ -3,6 +3,7 @@ package com.code4ro.legalconsultation.authentication.model.persistence;
 import com.code4ro.legalconsultation.core.model.persistence.BaseEntity;
 import com.code4ro.legalconsultation.user.model.persistence.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
 @Table(name = "applicationusers")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ApplicationUser extends BaseEntity {
 
     @NotBlank
@@ -33,10 +35,6 @@ public class ApplicationUser extends BaseEntity {
     @PrimaryKeyJoinColumn
     @MapsId
     private User user;
-
-    public ApplicationUser() {
-
-    }
 
     public ApplicationUser(String name, String username, String password) {
         this.name = name;

@@ -2,7 +2,6 @@ package com.code4ro.legalconsultation.pdf.service.impl;
 
 import com.code4ro.legalconsultation.core.exception.LegalValidationException;
 import com.code4ro.legalconsultation.document.consolidated.model.persistence.DocumentConsolidated;
-import com.code4ro.legalconsultation.document.reader.service.PDFReader;
 import com.code4ro.legalconsultation.document.reader.service.impl.BasicOARPdfReader;
 import com.code4ro.legalconsultation.pdf.mapper.PdfHandleMapper;
 import com.code4ro.legalconsultation.pdf.model.persistence.PdfHandle;
@@ -28,7 +27,6 @@ public class PDFServiceImpl implements PDFService {
     private final BasicOARPdfReader basicOARPdfReader;
 
     private final StorageApi storageApi;
-    private final PdfHandleMapper pdfHandleMapper;
     private final PdfHandleRepository pdfHandleRepository;
 
     @Autowired
@@ -38,7 +36,6 @@ public class PDFServiceImpl implements PDFService {
                           final PdfHandleRepository pdfHandleRepository) {
         this.basicOARPdfReader = basicOARPdfReader;
         this.storageApi = storageApi;
-        this.pdfHandleMapper = pdfHandleMapper;
         this.pdfHandleRepository = pdfHandleRepository;
     }
 
@@ -48,7 +45,7 @@ public class PDFServiceImpl implements PDFService {
         try {
             final PDDocument doc = PDDocument.load(file);
             // TODO: add a more general way for getting the right parser based on document template once we have more document types
-            return ((PDFReader) basicOARPdfReader).getContent(doc);
+            return (basicOARPdfReader).getContent(doc);
         } catch (IOException e) {
             log.warn("Exception while parsing PDF file", e);
             throw LegalValidationException.builder()
@@ -61,8 +58,8 @@ public class PDFServiceImpl implements PDFService {
     @Override
     public PdfHandle createPdf(@NonNull DocumentConsolidated owner, String state, MultipartFile file) {
         Integer hash = file.hashCode();
-        if (pdfHandleRepository.existsByHash(hash)) {
-            if (pdfHandleRepository.existsByHashAndState(hash, state)) {
+        if (pdfHandleRepository.existsByHash(hash).equals(Boolean.TRUE)) {
+            if (pdfHandleRepository.existsByHashAndState(hash, state).equals(Boolean.TRUE)) {
                 return pdfHandleRepository.findByHashAndState(hash, state);
             }
             final String handleId = pdfHandleRepository.findByHash(hash).getId().toString();

@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class UserService {
-    private static final String COMMA_REGEX = ",";
 
     private final UserRepository userRepository;
     private final CsvMapper csvMapper = new CsvMapper();
@@ -61,7 +60,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public UserDto saveAndSendRegistrationMail(final UserDto userDto) throws LegalValidationException {
+    public UserDto saveAndSendRegistrationMail(final UserDto userDto) {
         final User user = mapperService.map(userDto);
         final boolean isNew = user.isNew();
         final User savedUser = userRepository.save(user);
@@ -74,7 +73,7 @@ public class UserService {
         return mapperService.map(savedUser);
     }
 
-    public List<UserDto> saveAndSendRegistrationMail(final List<UserDto> userDtos) throws LegalValidationException {
+    public List<UserDto> saveAndSendRegistrationMail(final List<UserDto> userDtos) {
         final List<User> allUsers = userDtos.stream()
                 .map(mapperService::map)
                 .collect(Collectors.toList());
@@ -130,7 +129,7 @@ public class UserService {
         return reader.<UserDto>readValues(stream).readAll();
     }
 
-    public List<UserDto> extractFromCsv(final MultipartFile csvFile) throws LegalValidationException {
+    public List<UserDto> extractFromCsv(final MultipartFile csvFile) {
         try {
             return extractUsersFromInputStream(csvFile.getInputStream());
         } catch (Exception e) {

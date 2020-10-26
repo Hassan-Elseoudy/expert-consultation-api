@@ -52,13 +52,13 @@ public abstract class AbstractControllerIntegrationTest {
     }
 
     protected void persistMockedUser() {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.PENDING);
         invitationRepository.save(invitation);
 
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
         signUpRequest.setUsername("user");
         signUpRequest.setPassword("password");
         signUpRequest.setInvitationCode(invitation.getCode());

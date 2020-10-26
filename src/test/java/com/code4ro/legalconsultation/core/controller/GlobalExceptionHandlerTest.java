@@ -96,10 +96,10 @@ public class GlobalExceptionHandlerTest {
     }
 
     @RestController
-    public class TestController {
+    public static class TestController {
 
         @GetMapping("/testException")
-        ResponseEntity<String> testException() throws MethodArgumentNotValidException {
+        ResponseEntity<String> testException() {
             return null;
         }
     }

@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ApplicationUserServiceTest {
-    private final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
+    private final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
     @Mock
     private ApplicationUserRepository applicationUserRepository;
     @Mock
@@ -37,7 +38,7 @@ public class ApplicationUserServiceTest {
 
     @Test
     public void save() {
-        final User user = RandomObjectFiller.createAndFill(User.class);
+        final User user = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
 
         when(invitationService.isValid(signUpRequest)).thenReturn(true);
         when(userService.findByEmail(signUpRequest.getEmail())).thenReturn(Optional.of(user));
@@ -57,7 +58,7 @@ public class ApplicationUserServiceTest {
 
     @Test(expected = LegalValidationException.class)
     public void saveDuplicateEmail() {
-        final User user = RandomObjectFiller.createAndFill(User.class);
+        final User user = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
         when(userService.findByEmail(signUpRequest.getEmail())).thenReturn(Optional.of(user));
         when(applicationUserRepository.findById(user.getId())).thenReturn(Optional.of(new ApplicationUser()));
 

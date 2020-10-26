@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class PdfFileFactory {
@@ -32,7 +33,7 @@ public final class PdfFileFactory {
     }
 
     private static File getAsFile(final ClassLoader classLoader, final String filename) {
-        return new File(classLoader.getResource(String.format("pdf/%s", filename)).getFile());
+        return new File(Objects.requireNonNull(classLoader.getResource(String.format("pdf/%s", filename))).getFile());
     }
 
     public static MockMultipartFile getAsMultipart(final ClassLoader classLoader) {
@@ -50,7 +51,7 @@ public final class PdfFileFactory {
 
     public static List<File> getAsFiles(final ClassLoader classLoader) {
         return filenames.stream()
-                .map(fileName -> new File(classLoader.getResource(String.format("pdf/%s", fileName)).getFile()))
+                .map(fileName -> new File(Objects.requireNonNull(classLoader.getResource(String.format("pdf/%s", fileName))).getFile()))
                 .collect(Collectors.toList());
     }
 }

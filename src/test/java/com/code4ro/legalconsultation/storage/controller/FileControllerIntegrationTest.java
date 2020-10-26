@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileSystemUtils;
 
 import java.io.File;
+import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -31,7 +32,7 @@ public class FileControllerIntegrationTest extends AbstractControllerIntegration
     @WithMockUser
     @Transactional
     public void saveFile() throws Exception {
-        final MockMultipartFile randomFile = PdfFileFactory.getAsMultipart(getClass().getClassLoader());
+        final MockMultipartFile randomFile = Objects.requireNonNull(PdfFileFactory.getAsMultipart(getClass().getClassLoader()));
 
         final MvcResult mvcResult = mvc.perform(multipart("/api/file")
                 .file(randomFile))
@@ -47,7 +48,7 @@ public class FileControllerIntegrationTest extends AbstractControllerIntegration
     @WithMockUser
     @Transactional
     public void deleteFile() throws Exception {
-        final MockMultipartFile randomFile = PdfFileFactory.getAsMultipart(getClass().getClassLoader());
+        final MockMultipartFile randomFile = Objects.requireNonNull(PdfFileFactory.getAsMultipart(getClass().getClassLoader()));
 
         final MvcResult mvcResult = mvc.perform(multipart("/api/file")
                 .file(randomFile))

@@ -55,7 +55,7 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
     @Transactional
     public void saveDocument() throws Exception {
         final File file = PdfFileFactory.getAsFiles(getClass().getClassLoader()).get(0);
-        final DocumentViewDto randomView = RandomObjectFiller.createAndFill(DocumentViewDto.class);
+        final DocumentViewDto randomView = Objects.requireNonNull(RandomObjectFiller.createAndFill(DocumentViewDto.class));
         randomView.setFilePath(file.getPath());
 
         mvc.perform(post("/api/documents")
@@ -80,7 +80,7 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
     @Transactional
     public void saveDocumentDuplicatedNumber() throws Exception {
         final File file = PdfFileFactory.getAsFiles(getClass().getClassLoader()).get(0);
-        final DocumentViewDto firstDocument = RandomObjectFiller.createAndFill(DocumentViewDto.class);
+        final DocumentViewDto firstDocument = Objects.requireNonNull(RandomObjectFiller.createAndFill(DocumentViewDto.class));
         firstDocument.setFilePath(file.getPath());
 
         mvc.perform(post("/api/documents")
@@ -89,7 +89,7 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
-        final DocumentViewDto secondDocument = RandomObjectFiller.createAndFill(DocumentViewDto.class);
+        final DocumentViewDto secondDocument = Objects.requireNonNull(RandomObjectFiller.createAndFill(DocumentViewDto.class));
         secondDocument.setDocumentNumber(firstDocument.getDocumentNumber());
 
         mvc.perform(post("/api/documents")
@@ -105,7 +105,7 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
     @Transactional
     public void saveDocumentDuplicatedFilePath() throws Exception {
         final File file = PdfFileFactory.getAsFiles(getClass().getClassLoader()).get(0);
-        final DocumentViewDto firstDocument = RandomObjectFiller.createAndFill(DocumentViewDto.class);
+        final DocumentViewDto firstDocument = Objects.requireNonNull(RandomObjectFiller.createAndFill(DocumentViewDto.class));
         firstDocument.setFilePath(file.getPath());
 
         mvc.perform(post("/api/documents")
@@ -476,8 +476,8 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
         DocumentConsolidated consolidated = saveSingleConsolidated();
 
         final String state = "abcdef";
-        final MockMultipartFile randomFile = PdfFileFactory
-                .getAsMultipart(getClass().getClassLoader());
+        final MockMultipartFile randomFile = Objects.requireNonNull(PdfFileFactory
+                .getAsMultipart(getClass().getClassLoader()));
 
         mvc.perform(multipart("/api/documents/" + consolidated.getId().toString() + "/pdf")
                 .file(randomFile)

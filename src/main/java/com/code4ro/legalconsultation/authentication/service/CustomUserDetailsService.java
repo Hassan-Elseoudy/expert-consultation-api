@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String usernameOrEmail) {
         // let people login with either username or email
         final ApplicationUser applicationUser = applicationUserRepository.findByUsernameOrEmail(usernameOrEmail)
                 .orElseThrow(() ->
@@ -38,7 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     // used by JWTAuthenticationFilter
     @Transactional
     @Cacheable(cacheNames = "users")
-    public UserDetails loadUserById(UUID id) throws UsernameNotFoundException {
+    public UserDetails loadUserById(UUID id) {
         ApplicationUser applicationUser = applicationUserRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("ApplicationUser not found with id : " + id)
         );

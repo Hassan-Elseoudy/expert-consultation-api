@@ -19,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import static com.code4ro.legalconsultation.user.model.persistence.UserRole.ADMIN;
@@ -49,7 +50,7 @@ public class VoteServiceImplSaveOrUpdateTest {
 
     @Before
     public void before() {
-        currentUser = RandomObjectFiller.createAndFill(ApplicationUser.class);
+        currentUser = Objects.requireNonNull(RandomObjectFiller.createAndFill(ApplicationUser.class));
         currentUser.getUser().setRole(ADMIN);
 
         when(currentUserService.getCurrentUser()).thenReturn(currentUser);
@@ -119,7 +120,7 @@ public class VoteServiceImplSaveOrUpdateTest {
 
         assertThat(nullVote.getOwner()).isEqualTo(currentUser);
         assertThat(nullVote.getComment()).isEqualTo(comment);
-        assertThat(ABSTAIN).isEqualTo(nullVote.getVote());
+        assertThat(nullVote.getVote()).isEqualTo(ABSTAIN);
     }
 
     @Test
