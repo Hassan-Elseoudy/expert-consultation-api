@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
 
     @Bean
-    public Docket swaggerConfig() {
+    public Docket swaggerConfig(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.code4ro.legalconsultation.controller"))
@@ -32,7 +32,7 @@ public class SwaggerConfiguration {
                 .version("1.0")
                 .license("Mozilla Public License 2.0")
                 .licenseUrl("https://www.mozilla.org/en-US/MPL/2.0/")
-                .contact(new Contact("Code 4 Romania", "https://code4.ro/en/", "contact@code4.ro"))
+                .contact(new Contact("Code 4 Romania", "https://code4.ro/en/","contact@code4.ro"))
                 .build();
     }
 }
