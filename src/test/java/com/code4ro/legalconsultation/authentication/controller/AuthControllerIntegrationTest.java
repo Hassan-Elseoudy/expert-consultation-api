@@ -1,20 +1,22 @@
 package com.code4ro.legalconsultation.authentication.controller;
 
 
-import com.code4ro.legalconsultation.core.controller.AbstractControllerIntegrationTest;
-import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
 import com.code4ro.legalconsultation.authentication.model.dto.LoginRequest;
 import com.code4ro.legalconsultation.authentication.model.dto.SignUpRequest;
+import com.code4ro.legalconsultation.authentication.repository.ApplicationUserRepository;
+import com.code4ro.legalconsultation.core.controller.AbstractControllerIntegrationTest;
+import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
 import com.code4ro.legalconsultation.invitation.model.persistence.Invitation;
 import com.code4ro.legalconsultation.invitation.model.persistence.InvitationStatus;
-import com.code4ro.legalconsultation.user.model.persistence.User;
-import com.code4ro.legalconsultation.authentication.repository.ApplicationUserRepository;
 import com.code4ro.legalconsultation.invitation.repository.InvitationRepository;
+import com.code4ro.legalconsultation.user.model.persistence.User;
 import com.code4ro.legalconsultation.user.repository.UserRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,18 +35,18 @@ public class AuthControllerIntegrationTest extends AbstractControllerIntegration
     @Test
     @Transactional
     public void signUp() throws Exception {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.PENDING);
         invitationRepository.save(invitation);
 
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
         signUpRequest.setInvitationCode(invitation.getCode());
         signUpRequest.setEmail(user.getEmail());
         String json = objectMapper.writeValueAsString(signUpRequest);
 
-        // register successfuly
+        // register successfully
         mvc.perform(post("/api/auth/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
@@ -76,14 +78,14 @@ public class AuthControllerIntegrationTest extends AbstractControllerIntegration
     @Test
     @Transactional
     public void login() throws Exception {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.PENDING);
         invitationRepository.save(invitation);
 
         // register user
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
         signUpRequest.setInvitationCode(invitation.getCode());
         signUpRequest.setEmail(user.getEmail());
         String json = objectMapper.writeValueAsString(signUpRequest);
