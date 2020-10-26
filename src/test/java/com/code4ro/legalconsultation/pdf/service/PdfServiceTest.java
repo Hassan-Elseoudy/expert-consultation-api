@@ -1,11 +1,11 @@
 package com.code4ro.legalconsultation.pdf.service;
 
 import com.code4ro.legalconsultation.document.consolidated.model.persistence.DocumentConsolidated;
+import com.code4ro.legalconsultation.pdf.factory.PdfFileFactory;
 import com.code4ro.legalconsultation.pdf.model.persistence.PdfHandle;
 import com.code4ro.legalconsultation.pdf.repository.PdfHandleRepository;
-import com.code4ro.legalconsultation.storage.service.impl.FilesystemStorageService;
 import com.code4ro.legalconsultation.pdf.service.impl.PDFServiceImpl;
-import com.code4ro.legalconsultation.pdf.factory.PdfFileFactory;
+import com.code4ro.legalconsultation.storage.service.impl.FilesystemStorageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -39,7 +39,7 @@ public class PdfServiceTest {
         final UUID ownerUuid = UUID.randomUUID();
         final DocumentConsolidated owner = new DocumentConsolidated();
         owner.setId(ownerUuid);
-        
+
         final UUID pdfHandleId = UUID.randomUUID();
         final String state = "abcdef";
         final MultipartFile randomFile = PdfFileFactory

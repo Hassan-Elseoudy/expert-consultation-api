@@ -1,8 +1,8 @@
 package com.code4ro.legalconsultation.core.exception.handler;
 
 import com.code4ro.legalconsultation.core.exception.ExceptionResponse;
-import com.code4ro.legalconsultation.i18n.model.I18nError;
 import com.code4ro.legalconsultation.core.exception.LegalValidationException;
+import com.code4ro.legalconsultation.i18n.model.I18nError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

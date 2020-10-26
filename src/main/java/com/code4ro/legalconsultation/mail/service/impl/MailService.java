@@ -2,10 +2,10 @@ package com.code4ro.legalconsultation.mail.service.impl;
 
 import com.code4ro.legalconsultation.core.exception.LegalValidationException;
 import com.code4ro.legalconsultation.document.metadata.model.persistence.DocumentMetadata;
-import com.code4ro.legalconsultation.invitation.model.persistence.Invitation;
 import com.code4ro.legalconsultation.i18n.service.I18nService;
-import com.code4ro.legalconsultation.user.model.persistence.User;
+import com.code4ro.legalconsultation.invitation.model.persistence.Invitation;
 import com.code4ro.legalconsultation.mail.service.MailApi;
+import com.code4ro.legalconsultation.user.model.persistence.User;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,7 @@ public class MailService implements MailApi {
     private String configuredLocale;
     @Value("${app.email.sender}")
     private String from;
-  
+
     private final JavaMailSender mailSender;
     private final I18nService i18nService;
     private final Configuration freemarkerConfig;
@@ -61,11 +61,11 @@ public class MailService implements MailApi {
         final String translatedSubject = i18nService.translate("register.User.confirmation.subject");
         final String registerTemplate = getRegisterTemplate();
         invitations.forEach(invitation ->
-            buildAndSendEmail(translatedSubject,
-                    registerTemplate,
-                    getRegisterModel(invitation),
-                    invitation.getUser().getEmail())
-                    .ifPresent(failedEmails::add));
+                buildAndSendEmail(translatedSubject,
+                        registerTemplate,
+                        getRegisterModel(invitation),
+                        invitation.getUser().getEmail())
+                        .ifPresent(failedEmails::add));
 
         if (!failedEmails.isEmpty()) {
             throw LegalValidationException.builder()
@@ -84,7 +84,7 @@ public class MailService implements MailApi {
         final String documentAssignedTemplate = getDocumentAssignedTemplate();
         users.forEach(user ->
                 buildAndSendEmail(translatedSubject, documentAssignedTemplate, getDocumentAssignedModel(documentMetadata, user), user.getEmail())
-                    .ifPresent(failedEmails::add)
+                        .ifPresent(failedEmails::add)
         );
 
         if (!failedEmails.isEmpty()) {

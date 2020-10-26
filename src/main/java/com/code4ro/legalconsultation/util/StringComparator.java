@@ -2,7 +2,7 @@ package com.code4ro.legalconsultation.util;
 
 import org.springframework.util.StringUtils;
 
-final public class StringComparator {
+public final class StringComparator {
 
     public static boolean areEqualIgnoreCaseAndWhitespace(final String str1, final String str2) {
         final String str1WithoutWhitespace = StringUtils.trimAllWhitespace(str1);

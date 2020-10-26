@@ -14,10 +14,10 @@ import java.util.UUID;
 
 public class RandomObjectFiller {
 
-    public static  <T> T createAndFill(Class<T> clazz) {
+    public static <T> T createAndFill(Class<T> clazz) {
         try {
             final T instance = clazz.getDeclaredConstructor().newInstance();
-            for(final Field field: clazz.getDeclaredFields()) {
+            for (final Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
                 Object value = getRandomValueForField(field);
                 field.set(instance, value);
@@ -37,24 +37,24 @@ public class RandomObjectFiller {
     private static Object getRandomValueForField(Field field) {
         final Class<?> type = field.getType();
 
-        if(type.isEnum()) {
+        if (type.isEnum()) {
             Object[] enumValues = type.getEnumConstants();
             return enumValues[RandomUtils.nextInt(0, enumValues.length)];
-        } else if(type.equals(Integer.TYPE) || type.equals(Integer.class)) {
+        } else if (type.equals(Integer.TYPE) || type.equals(Integer.class)) {
             return RandomUtils.nextInt();
-        } else if(type.equals(Long.TYPE) || type.equals(Long.class)) {
+        } else if (type.equals(Long.TYPE) || type.equals(Long.class)) {
             return RandomUtils.nextLong();
-        } else if(type.equals(Double.TYPE) || type.equals(Double.class)) {
+        } else if (type.equals(Double.TYPE) || type.equals(Double.class)) {
             return RandomUtils.nextDouble();
-        } else if(type.equals(Float.TYPE) || type.equals(Float.class)) {
+        } else if (type.equals(Float.TYPE) || type.equals(Float.class)) {
             return RandomUtils.nextFloat();
-        } else if(type.equals(UUID.class)) {
+        } else if (type.equals(UUID.class)) {
             return UUID.randomUUID();
-        } else if(type.equals(BigInteger.class)){
+        } else if (type.equals(BigInteger.class)) {
             return BigInteger.valueOf(RandomUtils.nextInt());
-        } else if(type.equals(String.class)) {
+        } else if (type.equals(String.class)) {
             return getFieldWithContraint(field);
-        } else if(type.equals(Date.class)) {
+        } else if (type.equals(Date.class)) {
             int randomYear = RandomUtils.nextInt(1990, 2020);
             int randomDay = RandomUtils.nextInt(1, 366);
             Calendar calendar = Calendar.getInstance();

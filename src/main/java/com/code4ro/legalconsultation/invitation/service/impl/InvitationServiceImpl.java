@@ -1,12 +1,12 @@
 package com.code4ro.legalconsultation.invitation.service.impl;
 
-import com.code4ro.legalconsultation.core.exception.LegalValidationException;
 import com.code4ro.legalconsultation.authentication.model.dto.SignUpRequest;
+import com.code4ro.legalconsultation.core.exception.LegalValidationException;
 import com.code4ro.legalconsultation.invitation.model.persistence.Invitation;
 import com.code4ro.legalconsultation.invitation.model.persistence.InvitationStatus;
-import com.code4ro.legalconsultation.user.model.persistence.User;
 import com.code4ro.legalconsultation.invitation.repository.InvitationRepository;
 import com.code4ro.legalconsultation.invitation.service.InvitationService;
+import com.code4ro.legalconsultation.user.model.persistence.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

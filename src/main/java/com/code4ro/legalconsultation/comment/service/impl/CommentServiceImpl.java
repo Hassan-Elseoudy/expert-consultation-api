@@ -1,15 +1,15 @@
 package com.code4ro.legalconsultation.comment.service.impl;
 
+import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.comment.mapper.CommentMapper;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDetailDto;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDto;
 import com.code4ro.legalconsultation.comment.model.persistence.Comment;
 import com.code4ro.legalconsultation.comment.model.persistence.CommentStatus;
+import com.code4ro.legalconsultation.comment.repository.CommentRepository;
 import com.code4ro.legalconsultation.comment.service.CommentService;
 import com.code4ro.legalconsultation.core.exception.LegalValidationException;
 import com.code4ro.legalconsultation.document.node.model.persistence.DocumentNode;
-import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
-import com.code4ro.legalconsultation.comment.repository.CommentRepository;
 import com.code4ro.legalconsultation.document.node.service.DocumentNodeService;
 import com.code4ro.legalconsultation.security.service.CurrentUserService;
 import com.code4ro.legalconsultation.user.model.persistence.UserRole;

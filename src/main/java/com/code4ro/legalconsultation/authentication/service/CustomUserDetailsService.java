@@ -1,8 +1,8 @@
 package com.code4ro.legalconsultation.authentication.service;
 
-import com.code4ro.legalconsultation.security.model.CurrentUser;
 import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.authentication.repository.ApplicationUserRepository;
+import com.code4ro.legalconsultation.security.model.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;

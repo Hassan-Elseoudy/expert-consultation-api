@@ -1,9 +1,9 @@
 package com.code4ro.legalconsultation.document.consolidated.service;
 
 import com.code4ro.legalconsultation.document.consolidated.model.persistence.DocumentConsolidated;
+import com.code4ro.legalconsultation.document.consolidated.repository.DocumentConsolidatedRepository;
 import com.code4ro.legalconsultation.document.metadata.model.persistence.DocumentMetadata;
 import com.code4ro.legalconsultation.document.node.model.persistence.DocumentNode;
-import com.code4ro.legalconsultation.document.consolidated.repository.DocumentConsolidatedRepository;
 import com.code4ro.legalconsultation.document.node.service.DocumentNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

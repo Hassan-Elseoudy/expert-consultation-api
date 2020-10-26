@@ -1,11 +1,11 @@
 package com.code4ro.legalconsultation.user.controller;
 
 import com.code4ro.legalconsultation.core.controller.AbstractControllerIntegrationTest;
+import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
 import com.code4ro.legalconsultation.user.model.dto.UserDto;
 import com.code4ro.legalconsultation.user.model.persistence.User;
 import com.code4ro.legalconsultation.user.model.persistence.UserRole;
 import com.code4ro.legalconsultation.user.repository.UserRepository;
-import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

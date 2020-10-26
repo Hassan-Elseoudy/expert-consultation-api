@@ -1,8 +1,8 @@
 package com.code4ro.legalconsultation.security.config;
 
+import com.code4ro.legalconsultation.authentication.service.CustomUserDetailsService;
 import com.code4ro.legalconsultation.security.jwt.JwtAuthenticationEntryPoint;
 import com.code4ro.legalconsultation.security.jwt.JwtAuthenticationFilter;
-import com.code4ro.legalconsultation.authentication.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

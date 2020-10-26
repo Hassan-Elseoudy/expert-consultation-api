@@ -31,6 +31,7 @@ public class PDFBoldTextStripperByArea extends PDFTextStripper {
 
     @Override
     public final void setShouldSeparateByBeads(boolean aShouldSeparateByBeads) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     public void addRegion(String regionName, Rectangle2D rect) {
@@ -71,10 +72,10 @@ public class PDFBoldTextStripperByArea extends PDFTextStripper {
 
     @Override
     protected void processTextPosition(TextPosition text) {
-        for (String region : regionArea.keySet()) {
-            Rectangle2D rect = regionArea.get(region);
+        for (Map.Entry<String, Rectangle2D> region : regionArea.entrySet()) {
+            Rectangle2D rect = region.getValue();
             if (rect.contains(text.getX(), text.getY())) {
-                charactersByArticle = regionCharacterList.get(region);
+                charactersByArticle = regionCharacterList.get(region.getKey());
                 processForBold(text);
                 super.processTextPosition(text);
             }

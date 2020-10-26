@@ -227,52 +227,52 @@
       ecs_taskdefinition:
         family: legal-consult-task
         containers:
-        - name: "legal-client"
-          image: "{{ client_repo.repository.repositoryUri }}:latest"
-          portMappings:
-          - containerPort: 80
-            hostPort: 80
-          logConfiguration:
-            logDriver: awslogs
-            options:
-              awslogs-group: "legal-consultation-log-group"
-              awslogs-region: "{{ region }}"
-              awslogs-stream-prefix: "client"
-          cpu: 512
-          memory: 1024
-        - name: "legal-api"
-          image: "{{ api_repo.repository.repositoryUri }}:latest"
-          portMappings:
-          - containerPort: 8080
-            hostPort: 8080
-          logConfiguration:
-            logDriver: awslogs
-            options:
-              awslogs-group: "legal-consultation-log-group"
-              awslogs-region: "{{ region }}"
-              awslogs-stream-prefix: "api"
-          secrets:
-            - name: "MYSQL_DB_USERNAME"
-              valueFrom: "arn:aws:ssm:{{ region }}:{{ caller.account }}:parameter/legalconsultation/MYSQL_DB_USERNAME"
-            - name: "MYSQL_DB_PASSWORD"
-              valueFrom: "arn:aws:ssm:{{ region }}:{{ caller.account }}:parameter/legalconsultation/MYSQL_DB_PASSWORD"
-            - name: "MYSQL_DB_URL"
-              valueFrom: "arn:aws:ssm:{{ region }}:{{ caller.account }}:parameter/legalconsultation/MYSQL_DB_URL"
-          cpu: 512
-          memory: 1024
-        - name: "mailhog"
-          essential: true
-          image: "mailhog/mailhog:latest"
-          portMappings:
-          - containerPort: 8025
-            hostPort: 8025
-          - containerPort: 1025
-            hostPort: 1025
+          - name: "legal-client"
+            image: "{{ client_repo.repository.repositoryUri }}:latest"
+            portMappings:
+              - containerPort: 80
+                hostPort: 80
+            logConfiguration:
+              logDriver: awslogs
+              options:
+                awslogs-group: "legal-consultation-log-group"
+                awslogs-region: "{{ region }}"
+                awslogs-stream-prefix: "client"
+            cpu: 512
+            memory: 1024
+          - name: "legal-api"
+            image: "{{ api_repo.repository.repositoryUri }}:latest"
+            portMappings:
+              - containerPort: 8080
+                hostPort: 8080
+            logConfiguration:
+              logDriver: awslogs
+              options:
+                awslogs-group: "legal-consultation-log-group"
+                awslogs-region: "{{ region }}"
+                awslogs-stream-prefix: "api"
+            secrets:
+              - name: "MYSQL_DB_USERNAME"
+                valueFrom: "arn:aws:ssm:{{ region }}:{{ caller.account }}:parameter/legalconsultation/MYSQL_DB_USERNAME"
+              - name: "MYSQL_DB_PASSWORD"
+                valueFrom: "arn:aws:ssm:{{ region }}:{{ caller.account }}:parameter/legalconsultation/MYSQL_DB_PASSWORD"
+              - name: "MYSQL_DB_URL"
+                valueFrom: "arn:aws:ssm:{{ region }}:{{ caller.account }}:parameter/legalconsultation/MYSQL_DB_URL"
+            cpu: 512
+            memory: 1024
+          - name: "mailhog"
+            essential: true
+            image: "mailhog/mailhog:latest"
+            portMappings:
+              - containerPort: 8025
+                hostPort: 8025
+              - containerPort: 1025
+                hostPort: 1025
         launch_type: FARGATE
         cpu: 1024
         memory: 2048
         network_mode: awsvpc
-        execution_role_arn : "{{ task_role.arn }}"
+        execution_role_arn: "{{ task_role.arn }}"
         state: present
 
     - name: Create the ECS cluster
@@ -291,9 +291,9 @@
         network_configuration:
           assign_public_ip: yes
           subnets:
-          - "{{ publicsub.subnet.id }}"
+            - "{{ publicsub.subnet.id }}"
           security_groups:
-          - "{{ sec_group.group_id }}"
+            - "{{ sec_group.group_id }}"
         state: present
 
     - name: Created endpoints

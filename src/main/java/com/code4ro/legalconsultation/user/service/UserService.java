@@ -1,15 +1,15 @@
 package com.code4ro.legalconsultation.user.service;
 
 import com.code4ro.legalconsultation.core.exception.LegalValidationException;
-import com.code4ro.legalconsultation.user.mapper.UserMapper;
 import com.code4ro.legalconsultation.invitation.model.persistence.Invitation;
-import com.code4ro.legalconsultation.user.model.persistence.User;
+import com.code4ro.legalconsultation.invitation.service.InvitationService;
+import com.code4ro.legalconsultation.mail.service.MailApi;
+import com.code4ro.legalconsultation.user.mapper.UserMapper;
 import com.code4ro.legalconsultation.user.model.dto.UserDto;
+import com.code4ro.legalconsultation.user.model.persistence.User;
 import com.code4ro.legalconsultation.user.model.persistence.UserRole;
 import com.code4ro.legalconsultation.user.model.persistence.UserSpecialization;
 import com.code4ro.legalconsultation.user.repository.UserRepository;
-import com.code4ro.legalconsultation.invitation.service.InvitationService;
-import com.code4ro.legalconsultation.mail.service.MailApi;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;

@@ -10,5 +10,6 @@ import java.util.UUID;
 @Repository
 public interface DocumentMetadataRepository extends JpaRepository<DocumentMetadata, UUID> {
     Boolean existsByDocumentNumber(BigInteger documentNumber);
+
     Boolean existsByFilePath(String filePath);
 }

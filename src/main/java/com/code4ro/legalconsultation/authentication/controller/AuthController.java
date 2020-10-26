@@ -1,13 +1,13 @@
 package com.code4ro.legalconsultation.authentication.controller;
 
-import com.code4ro.legalconsultation.core.exception.LegalValidationException;
-import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
-import com.code4ro.legalconsultation.core.model.dto.ApiResponse;
 import com.code4ro.legalconsultation.authentication.model.dto.JwtAuthenticationResponse;
 import com.code4ro.legalconsultation.authentication.model.dto.LoginRequest;
 import com.code4ro.legalconsultation.authentication.model.dto.SignUpRequest;
-import com.code4ro.legalconsultation.security.jwt.JwtTokenProvider;
+import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.authentication.service.ApplicationUserService;
+import com.code4ro.legalconsultation.core.exception.LegalValidationException;
+import com.code4ro.legalconsultation.core.model.dto.ApiResponse;
+import com.code4ro.legalconsultation.security.jwt.JwtTokenProvider;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;

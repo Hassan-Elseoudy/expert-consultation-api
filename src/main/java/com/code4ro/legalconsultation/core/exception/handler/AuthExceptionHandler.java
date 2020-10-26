@@ -1,8 +1,8 @@
 package com.code4ro.legalconsultation.core.exception.handler;
 
+import com.code4ro.legalconsultation.authentication.controller.AuthController;
 import com.code4ro.legalconsultation.core.exception.ExceptionResponse;
 import com.code4ro.legalconsultation.i18n.model.I18nError;
-import com.code4ro.legalconsultation.authentication.controller.AuthController;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

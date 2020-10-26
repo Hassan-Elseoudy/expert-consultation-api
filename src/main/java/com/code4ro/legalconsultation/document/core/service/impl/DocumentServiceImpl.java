@@ -25,8 +25,6 @@ import com.code4ro.legalconsultation.user.mapper.UserMapper;
 import com.code4ro.legalconsultation.user.model.dto.UserDto;
 import com.code4ro.legalconsultation.user.model.persistence.User;
 import com.code4ro.legalconsultation.user.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,14 +1,14 @@
 package com.code4ro.legalconsultation.pdf.service.impl;
 
 import com.code4ro.legalconsultation.core.exception.LegalValidationException;
-import com.code4ro.legalconsultation.pdf.mapper.PdfHandleMapper;
 import com.code4ro.legalconsultation.document.consolidated.model.persistence.DocumentConsolidated;
+import com.code4ro.legalconsultation.document.reader.service.PDFReader;
+import com.code4ro.legalconsultation.document.reader.service.impl.BasicOARPdfReader;
+import com.code4ro.legalconsultation.pdf.mapper.PdfHandleMapper;
 import com.code4ro.legalconsultation.pdf.model.persistence.PdfHandle;
 import com.code4ro.legalconsultation.pdf.repository.PdfHandleRepository;
 import com.code4ro.legalconsultation.pdf.service.PDFService;
 import com.code4ro.legalconsultation.storage.service.StorageApi;
-import com.code4ro.legalconsultation.document.reader.service.impl.BasicOARPdfReader;
-import com.code4ro.legalconsultation.document.reader.service.PDFReader;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;

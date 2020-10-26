@@ -1,16 +1,16 @@
 package com.code4ro.legalconsultation.comment.controller;
 
+import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.authentication.service.ApplicationUserService;
+import com.code4ro.legalconsultation.comment.factory.CommentFactory;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDetailDto;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDto;
 import com.code4ro.legalconsultation.comment.model.persistence.Comment;
+import com.code4ro.legalconsultation.comment.repository.CommentRepository;
 import com.code4ro.legalconsultation.comment.service.CommentService;
 import com.code4ro.legalconsultation.core.controller.AbstractControllerIntegrationTest;
-import com.code4ro.legalconsultation.comment.factory.CommentFactory;
 import com.code4ro.legalconsultation.document.node.factory.DocumentNodeFactory;
-import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.document.node.model.persistence.DocumentNode;
-import com.code4ro.legalconsultation.comment.repository.CommentRepository;
 import com.code4ro.legalconsultation.security.service.CurrentUserService;
 import org.junit.Before;
 import org.junit.Test;

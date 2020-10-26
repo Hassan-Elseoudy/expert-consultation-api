@@ -1,7 +1,7 @@
 package com.code4ro.legalconsultation.vote.model.persistence;
 
-import com.code4ro.legalconsultation.comment.model.persistence.Comment;
 import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
+import com.code4ro.legalconsultation.comment.model.persistence.Comment;
 import com.code4ro.legalconsultation.core.model.persistence.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

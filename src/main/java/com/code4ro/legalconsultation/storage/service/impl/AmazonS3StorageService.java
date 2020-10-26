@@ -66,8 +66,8 @@ public class AmazonS3StorageService implements StorageApi {
         log.info("Storing document with name {}.", uniqueDocumentName);
         try {
             final PutObjectRequest putObjectRequest =
-                new PutObjectRequest(documentBucket, uniqueDocumentName, document.getInputStream(), data)
-                .withCannedAcl(CannedAccessControlList.PublicRead);
+                    new PutObjectRequest(documentBucket, uniqueDocumentName, document.getInputStream(), data)
+                            .withCannedAcl(CannedAccessControlList.PublicRead);
             amazonS3.putObject(putObjectRequest);
         } catch (Exception e) {
             log.error("Storing of document with name: {} failed.", uniqueDocumentName, e);

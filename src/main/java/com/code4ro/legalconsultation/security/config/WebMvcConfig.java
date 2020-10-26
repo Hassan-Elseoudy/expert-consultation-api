@@ -11,6 +11,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * allow cross origin requests from the angular client
+     *
      * @param registry .
      */
     @Override

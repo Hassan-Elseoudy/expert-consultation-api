@@ -1,9 +1,9 @@
 package com.code4ro.legalconsultation.document.node.controller;
 
 import com.code4ro.legalconsultation.core.controller.AbstractControllerIntegrationTest;
+import com.code4ro.legalconsultation.document.node.factory.DocumentNodeFactory;
 import com.code4ro.legalconsultation.document.node.mapper.DocumentNodeMapper;
 import com.code4ro.legalconsultation.document.node.model.persistence.DocumentNode;
-import com.code4ro.legalconsultation.document.node.factory.DocumentNodeFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,9 @@ public class DocumentNodeControllerIntegrationTest extends AbstractControllerInt
     private DocumentNodeMapper nodeMapper;
 
     @Before
-    public void before() {persistMockedUser();}
+    public void before() {
+        persistMockedUser();
+    }
 
     @Test
     @WithMockUser

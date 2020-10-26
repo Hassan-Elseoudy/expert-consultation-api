@@ -1,7 +1,7 @@
 package com.code4ro.legalconsultation.user.mapper;
 
-import com.code4ro.legalconsultation.user.model.persistence.User;
 import com.code4ro.legalconsultation.user.model.dto.UserDto;
+import com.code4ro.legalconsultation.user.model.persistence.User;
 import org.mapstruct.Mapper;
 
 import java.util.List;

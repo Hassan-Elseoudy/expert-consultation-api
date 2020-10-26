@@ -1,11 +1,11 @@
 package com.code4ro.legalconsultation.mail.service;
 
 import com.code4ro.legalconsultation.core.exception.LegalValidationException;
-import com.code4ro.legalconsultation.invitation.model.persistence.Invitation;
-import com.code4ro.legalconsultation.user.model.persistence.User;
-import com.code4ro.legalconsultation.i18n.service.I18nService;
-import com.code4ro.legalconsultation.mail.service.impl.MailService;
 import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
+import com.code4ro.legalconsultation.i18n.service.I18nService;
+import com.code4ro.legalconsultation.invitation.model.persistence.Invitation;
+import com.code4ro.legalconsultation.mail.service.impl.MailService;
+import com.code4ro.legalconsultation.user.model.persistence.User;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -26,11 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailServiceTest {

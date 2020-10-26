@@ -1,9 +1,9 @@
 package com.code4ro.legalconsultation.security.service;
 
-import com.code4ro.legalconsultation.security.model.CurrentUser;
-import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
 import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.authentication.service.ApplicationUserService;
+import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
+import com.code4ro.legalconsultation.security.model.CurrentUser;
 import com.code4ro.legalconsultation.security.service.impl.SpringCurrentUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
