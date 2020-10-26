@@ -114,7 +114,7 @@ public class CommentControllerIntegrationTest extends AbstractControllerIntegrat
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        assertThat(commentRepository.count()).isEqualTo(0);
+        assertThat(commentRepository.count()).isZero();
     }
 
     @Test

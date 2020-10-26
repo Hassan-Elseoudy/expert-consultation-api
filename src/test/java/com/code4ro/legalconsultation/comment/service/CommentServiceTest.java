@@ -141,8 +141,8 @@ public class CommentServiceTest {
         Page<Comment> all = commentService.findAll(nodeId, pageable);
 
         //then
-        assertEquals("response size should be 1", all.getContent().size(), 1L);
-        assertEquals("text is different", all.getContent().get(0).getText(), text);
+        assertEquals("response size should be 1", 1L, all.getContent().size());
+        assertEquals("text is different", text, all.getContent().get(0).getText());
     }
 
     @Test

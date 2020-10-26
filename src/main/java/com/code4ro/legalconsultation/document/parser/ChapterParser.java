@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 @Component
 public class ChapterParser extends DocumentNodeParser {
-    private final String tokenWithoutTitleRegex = "(CAPITOLUL) ([^:]*?)$";
+    private static final String TOKEN_WITHOUT_TITLE_REGEX = "(CAPITOLUL) ([^:]*?)$";
 
     @Override
     protected String getTitle(final Matcher matcher) {
@@ -32,6 +32,6 @@ public class ChapterParser extends DocumentNodeParser {
 
     @Override
     protected Pattern getPatternWithoutTitle() {
-        return Pattern.compile(tokenWithoutTitleRegex);
+        return Pattern.compile(TOKEN_WITHOUT_TITLE_REGEX);
     }
 }

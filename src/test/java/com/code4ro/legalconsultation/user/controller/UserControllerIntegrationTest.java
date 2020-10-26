@@ -16,10 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.internet.MimeMessage;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -109,7 +106,7 @@ public class UserControllerIntegrationTest extends AbstractControllerIntegration
     @WithMockUser
     @Transactional
     public void getUser() throws Exception {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
 
         mvc.perform(get("/api/users/" + user.getId().toString())
                 .accept(MediaType.APPLICATION_JSON))
@@ -154,14 +151,14 @@ public class UserControllerIntegrationTest extends AbstractControllerIntegration
     @WithMockUser
     @Transactional
     public void deleteUser() throws Exception {
-        final User user = userRepository.save(RandomObjectFiller.createAndFill(User.class));
+        final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
         assertThat(userRepository.count()).isEqualTo(1);
 
         mvc.perform(delete("/api/users/" + user.getId().toString())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        assertThat(userRepository.count()).isEqualTo(0);
+        assertThat(userRepository.count()).isZero();
     }
 
     @Test
@@ -209,11 +206,11 @@ public class UserControllerIntegrationTest extends AbstractControllerIntegration
     @WithMockUser
     @Transactional
     public void searchUserByTerm() throws Exception {
-        User firstNameUser = RandomObjectFiller.createAndFill(User.class);
+        User firstNameUser = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
         firstNameUser.setFirstName("firstly");
-        User lastNameUser = RandomObjectFiller.createAndFill(User.class);
+        User lastNameUser = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
         lastNameUser.setLastName("lastly");
-        User emailUser = RandomObjectFiller.createAndFill(User.class);
+        User emailUser = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
         emailUser.setEmail("emaily@mail.com");
         userRepository.saveAll(Arrays.asList(firstNameUser, lastNameUser, emailUser));
 

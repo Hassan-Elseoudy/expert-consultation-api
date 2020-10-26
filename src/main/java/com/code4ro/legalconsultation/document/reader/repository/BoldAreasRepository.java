@@ -16,7 +16,7 @@ public class BoldAreasRepository {
     }
 
     public void clear() {
-        this.boldAreas.clear();;
+        this.boldAreas.clear();
     }
 
     public String getMatchingBoldArea(final String text) {

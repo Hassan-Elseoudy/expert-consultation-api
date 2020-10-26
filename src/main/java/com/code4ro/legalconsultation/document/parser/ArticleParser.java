@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 @Component
 public class ArticleParser extends DocumentNodeParser {
-    private final String tokenWithoutTitleRegex = "(Art[.]) ([0-9]*)$";
+    private static final String TOKEN_WITHOUT_TITLE_REGEX = "(Art[.]) ([0-9]*)$";
 
     @Override
     protected String getTitle(final Matcher matcher) {
@@ -36,6 +36,6 @@ public class ArticleParser extends DocumentNodeParser {
 
     @Override
     protected Pattern getPatternWithoutTitle() {
-        return Pattern.compile(tokenWithoutTitleRegex);
+        return Pattern.compile(TOKEN_WITHOUT_TITLE_REGEX);
     }
 }

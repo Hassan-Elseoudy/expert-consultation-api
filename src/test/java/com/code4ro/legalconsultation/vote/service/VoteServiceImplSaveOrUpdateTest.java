@@ -103,7 +103,7 @@ public class VoteServiceImplSaveOrUpdateTest {
         nullVoteDto.setVote(null);
         nullVoteDto.setCommentId(id);
         Object result = voteService.vote(nullVoteDto);
-        assertThat(result).isEqualTo(null);
+        assertThat(result).isNull();
     }
 
     @Test

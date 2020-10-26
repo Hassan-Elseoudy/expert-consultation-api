@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserMapper {
     User map(UserDto userDto);
 
-    UserDto map(User User);
+    UserDto map(User user);
 
     List<UserDto> map(List<User> users);
 }
