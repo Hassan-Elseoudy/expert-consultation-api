@@ -23,9 +23,14 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailServiceTest {
@@ -47,8 +52,8 @@ public class MailServiceTest {
     public void sendRegisterMail() throws IOException, TemplateException {
         ReflectionTestUtils.setField(mailService, "signupUrl", "signupurl");
         ReflectionTestUtils.setField(mailService, "from", "email@legalconsultingtest.ro");
-        final User user = RandomObjectFiller.createAndFill(User.class);
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final User user = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         final MimeMessage message = mock(MimeMessage.class);
         when(mailSender.createMimeMessage()).thenReturn(message);
@@ -60,14 +65,14 @@ public class MailServiceTest {
 
         verify(mailSender).send(message);
         verify(template).process(modelCaptor.capture(), any());
-        assertThat(modelCaptor.getValue().get("username")).isEqualTo(user.getFirstName() + ' ' + user.getLastName());
-        assertThat(modelCaptor.getValue().get("signupurl")).isEqualTo("signupurl" + '/' + invitation.getCode());
+        assertThat(modelCaptor.getValue().get("username")).contains(user.getFirstName() + ' ' + user.getLastName());
+        assertThat(modelCaptor.getValue().get("signupurl")).contains("signupurl" + '/' + invitation.getCode());
     }
 
     @Test(expected = LegalValidationException.class)
     public void sendRegisterMailFailed() {
-        final User user = RandomObjectFiller.createAndFill(User.class);
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final User user = Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class));
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         final MimeMessage message = mock(MimeMessage.class);
         when(mailSender.createMimeMessage()).thenReturn(message);

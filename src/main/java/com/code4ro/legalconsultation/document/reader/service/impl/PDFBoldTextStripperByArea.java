@@ -58,11 +58,10 @@ public class PDFBoldTextStripperByArea extends PDFTextStripper {
             setEndPage(getCurrentPageNo());
             //reset the stored text for the region so this class
             //can be reused.
-            String regionName = region;
             ArrayList<List<TextPosition>> regionCharactersByArticle = new ArrayList<>();
             regionCharactersByArticle.add(new ArrayList<>());
-            regionCharacterList.put(regionName, regionCharactersByArticle);
-            regionText.put(regionName, new StringWriter());
+            regionCharacterList.put(region, regionCharactersByArticle);
+            regionText.put(region, new StringWriter());
         }
 
         if (page.hasContents()) {

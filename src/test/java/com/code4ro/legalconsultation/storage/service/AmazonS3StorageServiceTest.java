@@ -37,7 +37,7 @@ public class AmazonS3StorageServiceTest {
     private ArgumentCaptor<PutObjectRequest> putObjectRequestArgumentCaptor;
 
 
-    private String documentBucket = "documentBucket";
+    private final String documentBucket = "documentBucket";
 
     @Before
     public void before() {
@@ -45,7 +45,7 @@ public class AmazonS3StorageServiceTest {
     }
 
     @Test
-    public void storeFile() throws Exception {
+    public void storeFile() {
         final MultipartFile randomFile = new MockMultipartFile("file", "file", "text/plain",
                 "text".getBytes());
 
@@ -58,7 +58,7 @@ public class AmazonS3StorageServiceTest {
     }
 
     @Test
-    public void loadFile() throws IOException {
+    public void loadFile() {
         final String uri = "uri";
         final S3Object object = new S3Object();
         object.setObjectContent(new ByteArrayInputStream("text".getBytes()));
@@ -70,7 +70,7 @@ public class AmazonS3StorageServiceTest {
     }
 
     @Test
-    public void deleteFile() throws IOException {
+    public void deleteFile() {
         final String uri = "uri";
         final S3Object object = new S3Object();
         object.setObjectContent(new ByteArrayInputStream("text".getBytes()));

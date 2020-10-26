@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 @Component
 public class ParagraphParser extends DocumentNodeParser {
-    private final String tokenWithoutTitleRegex = "(?!.*).";
+    private static final String TOKEN_WITHOUT_TITLE_REGEX = "(?!.*).";
 
     @Override
     protected String getTitle(final Matcher matcher) {
@@ -32,7 +32,7 @@ public class ParagraphParser extends DocumentNodeParser {
 
     @Override
     protected Pattern getPatternWithoutTitle() {
-        return Pattern.compile(tokenWithoutTitleRegex);
+        return Pattern.compile(TOKEN_WITHOUT_TITLE_REGEX);
     }
 
     @Override

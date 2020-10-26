@@ -18,8 +18,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BasicOARPdfReaderTest {
@@ -45,7 +46,7 @@ public class BasicOARPdfReaderTest {
                 "rof_2018_pdf_1536138173.pdf");
 
         filenames.forEach(filename -> {
-            File file = new File(classLoader.getResource(String.format("pdf/%s", filename)).getFile());
+            File file = new File(Objects.requireNonNull(classLoader.getResource(String.format("pdf/%s", filename))).getFile());
             try {
                 final PDDocument document = PDDocument.load(file);
                 final String content = pdfReader.getContent(document);
@@ -59,7 +60,7 @@ public class BasicOARPdfReaderTest {
 
     private String getExpectedContent(final String filename) throws IOException {
         final String newFilename = filename.replace(".pdf", ".txt");
-        final String filePath = new File(classLoader.getResource(String.format("pdf/%s", newFilename)).getFile()).getAbsolutePath();
+        final String filePath = new File(Objects.requireNonNull(classLoader.getResource(String.format("pdf/%s", newFilename))).getFile()).getAbsolutePath();
         return Files.readString(Paths.get(filePath));
     }
 }

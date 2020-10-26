@@ -48,8 +48,7 @@ public class PDFServiceImpl implements PDFService {
         try {
             final PDDocument doc = PDDocument.load(file);
             // TODO: add a more general way for getting the right parser based on document template once we have more document types
-            final PDFReader pdfReader = basicOARPdfReader;
-            return pdfReader.getContent(doc);
+            return ((PDFReader) basicOARPdfReader).getContent(doc);
         } catch (IOException e) {
             log.warn("Exception while parsing PDF file", e);
             throw LegalValidationException.builder()

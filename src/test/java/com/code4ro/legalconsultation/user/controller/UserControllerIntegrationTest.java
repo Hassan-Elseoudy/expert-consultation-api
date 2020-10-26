@@ -42,7 +42,7 @@ public class UserControllerIntegrationTest extends AbstractControllerIntegration
     @WithMockUser
     @Transactional
     public void saveUser() throws Exception {
-        final UserDto userDto = RandomObjectFiller.createAndFill(UserDto.class);
+        final UserDto userDto = Objects.requireNonNull(RandomObjectFiller.createAndFill(UserDto.class));
         userDto.setId(null);
 
         mvc.perform(post("/api/users")
@@ -61,7 +61,7 @@ public class UserControllerIntegrationTest extends AbstractControllerIntegration
     @WithMockUser
     @Transactional
     public void saveUserEmailException() throws Exception {
-        final UserDto userDto = RandomObjectFiller.createAndFill(UserDto.class);
+        final UserDto userDto = Objects.requireNonNull(RandomObjectFiller.createAndFill(UserDto.class));
         userDto.setId(null);
 
         mvc.perform(post("/api/users")

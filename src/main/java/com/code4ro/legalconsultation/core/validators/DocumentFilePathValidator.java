@@ -9,7 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 
 @AllArgsConstructor
 public class DocumentFilePathValidator implements ConstraintValidator<UniqueDocumentFilePath, String> {
-    private DocumentMetadataRepository documentMetadataRepository;
+    private final DocumentMetadataRepository documentMetadataRepository;
 
     @Override
     public boolean isValid(final String filePath, final ConstraintValidatorContext context) {

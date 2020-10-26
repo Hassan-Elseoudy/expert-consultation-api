@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class StartTokenMatcher {
-    private Map<StartToken, Pattern> patterns;
+    private final Map<StartToken, Pattern> patterns;
 
     public StartTokenMatcher() {
         this.patterns = Arrays.stream(StartToken.values())

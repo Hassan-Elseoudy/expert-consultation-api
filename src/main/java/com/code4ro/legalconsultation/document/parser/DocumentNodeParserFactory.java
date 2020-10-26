@@ -19,7 +19,7 @@ public class DocumentNodeParserFactory {
     private final ParagraphParser paragraphParser;
     private final AlignmentParser alignmentParser;
 
-    private Map<StartToken, Pattern> patterns;
+    private final Map<StartToken, Pattern> patterns;
 
     @Autowired
     public DocumentNodeParserFactory(final ChapterParser chapterParser,

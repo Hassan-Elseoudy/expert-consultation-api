@@ -15,19 +15,19 @@ import java.util.UUID;
 
 @Getter
 public class CurrentUser implements UserDetails {
-    private UUID id;
+    private final UUID id;
 
-    private String fullName;
+    private final String fullName;
 
-    private String username;
+    private final String username;
 
-    private UserRole role;
-
-    @JsonIgnore
-    private String email;
+    private final UserRole role;
 
     @JsonIgnore
-    private String password;
+    private final String email;
+
+    @JsonIgnore
+    private final String password;
 
 
     public CurrentUser(UUID id, String fullName, String username, String email, String password, UserRole role) {

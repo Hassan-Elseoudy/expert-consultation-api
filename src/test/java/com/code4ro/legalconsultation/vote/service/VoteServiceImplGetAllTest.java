@@ -16,10 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import static com.code4ro.legalconsultation.core.factory.RandomObjectFiller.createAndFill;
 import static com.code4ro.legalconsultation.user.model.persistence.UserRole.ADMIN;
@@ -40,8 +37,8 @@ public class VoteServiceImplGetAllTest {
     @InjectMocks
     private VoteServiceImpl voteService;
 
-    private ApplicationUser currentUser = createAndFill(ApplicationUser.class);
-    private UUID uuidComment = randomUUID();
+    private final ApplicationUser currentUser = Objects.requireNonNull(createAndFill(ApplicationUser.class));
+    private final UUID uuidComment = randomUUID();
 
     @Before
     public void before() {

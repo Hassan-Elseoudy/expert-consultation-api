@@ -10,7 +10,7 @@ import java.math.BigInteger;
 
 @AllArgsConstructor
 public class DocumentNumberValidation implements ConstraintValidator<UniqueDocumentNumberConstraint, BigInteger> {
-    private DocumentMetadataRepository documentMetadataRepository;
+    private final DocumentMetadataRepository documentMetadataRepository;
 
     @Override
     public boolean isValid(final BigInteger documentNumber, final ConstraintValidatorContext context) {

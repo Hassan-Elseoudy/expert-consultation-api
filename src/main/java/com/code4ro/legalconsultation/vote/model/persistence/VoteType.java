@@ -5,7 +5,7 @@ public enum VoteType {
     DOWN(-1),
     ABSTAIN(0);
 
-    private int score;
+    private final int score;
 
     VoteType(int score) {
         this.score = score;

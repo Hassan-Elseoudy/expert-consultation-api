@@ -16,7 +16,7 @@ import java.util.UUID;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private ApplicationUserRepository applicationUserRepository;
+    private final ApplicationUserRepository applicationUserRepository;
 
     @Autowired
     public CustomUserDetailsService(final ApplicationUserRepository applicationUserRepository) {
