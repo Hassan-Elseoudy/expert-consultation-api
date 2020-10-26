@@ -28,7 +28,12 @@ import org.springframework.util.FileSystemUtils;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -114,7 +119,7 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
 
-        final DocumentViewDto secondDocument = RandomObjectFiller.createAndFill(DocumentViewDto.class);
+        final DocumentViewDto secondDocument = Objects.requireNonNull(RandomObjectFiller.createAndFill(DocumentViewDto.class));
         secondDocument.setFilePath(file.getPath());
 
         mvc.perform(post("/api/documents")
