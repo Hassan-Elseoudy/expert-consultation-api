@@ -3,9 +3,12 @@ package com.code4ro.legalconsultation.document.core.controller;
 import com.amazonaws.util.json.Jackson;
 import com.code4ro.legalconsultation.comment.factory.CommentFactory;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDetailDto;
+import com.code4ro.legalconsultation.comment.model.persistence.CommentStatus;
+import com.code4ro.legalconsultation.comment.service.CommentService;
 import com.code4ro.legalconsultation.core.controller.AbstractControllerIntegrationTest;
 import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
 import com.code4ro.legalconsultation.document.configuration.model.persistence.DocumentConfiguration;
+import com.code4ro.legalconsultation.document.configuration.repository.DocumentConfigurationRepository;
 import com.code4ro.legalconsultation.document.consolidated.model.dto.DocumentConsultationDataDto;
 import com.code4ro.legalconsultation.document.consolidated.model.persistence.DocumentConsolidated;
 import com.code4ro.legalconsultation.document.consolidated.repository.DocumentConsolidatedRepository;
@@ -36,8 +39,13 @@ import java.util.Objects;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class DocumentControllerIntegrationTest extends AbstractControllerIntegrationTest {
 
@@ -49,11 +57,15 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
     @Autowired
     private DocumentConsolidatedRepository documentConsolidatedRepository;
     @Autowired
+    private DocumentConfigurationRepository documentConfigurationRepository;
+    @Autowired
     private DocumentNodeRepository documentNodeRepository;
     @Autowired
     private DocumentNodeFactory documentNodeFactory;
     @Autowired
     private CommentFactory commentFactory;
+    @Autowired
+    private CommentService commentService;
 
     @Test
     @WithMockUser
@@ -71,6 +83,7 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
         assertThat(documentMetadataRepository.count()).isEqualTo(1);
         assertThat(documentConsolidatedRepository.count()).isEqualTo(1);
         assertThat(documentNodeRepository.count()).isEqualTo(14);
+        assertThat(documentConfigurationRepository.count()).isEqualTo(1);
 
         final String soredFilePath = documentMetadataRepository.findAll().get(0).getFilePath();
         assertThatDocumentIsStored(soredFilePath);
@@ -261,9 +274,15 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
         CommentDetailDto comment1 = commentFactory.save(consolidated.getDocumentNode().getId());
         CommentDetailDto comment2 = commentFactory.save(consolidated.getDocumentNode().getId());
 
-        commentFactory.saveReply(comment1.getId());
-        commentFactory.saveReply(comment1.getId());
-        commentFactory.saveReply(comment2.getId());
+        final CommentDetailDto reply1 = commentFactory.saveReply(comment1.getId());
+        final CommentDetailDto reply2 = commentFactory.saveReply(comment1.getId());
+        final CommentDetailDto reply3 = commentFactory.saveReply(comment2.getId());
+
+        commentService.setStatus(comment1.getId(), CommentStatus.APPROVED);
+        commentService.setStatus(comment2.getId(), CommentStatus.APPROVED);
+        commentService.setStatus(reply1.getId(), CommentStatus.APPROVED);
+        commentService.setStatus(reply2.getId(), CommentStatus.APPROVED);
+        commentService.setStatus(reply3.getId(), CommentStatus.APPROVED);
 
         mvc.perform(get(endpoint("/api/documents/", consolidated.getDocumentMetadata().getId(), "/consolidated"))
                 .accept(MediaType.APPLICATION_JSON))
@@ -515,7 +534,6 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
         final DocumentConsultationDataDto documentConsultationDataDto = new DocumentConsultationDataDto(
                 startDate, consultationDeadline, true);
 
-
         mvc.perform(
                 multipart("/api/documents/" + consolidated.getDocumentMetadata().getId().toString() + "/consultation")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -527,7 +545,7 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.startDate").isNotEmpty())
+                .andExpect(jsonPath("$.consultationStartDate").isNotEmpty())
                 .andExpect(jsonPath("$.consultationDeadline").isNotEmpty())
                 .andExpect(jsonPath("$.excludedFromConsultation").value(true));
     }
@@ -536,10 +554,13 @@ public class DocumentControllerIntegrationTest extends AbstractControllerIntegra
     private DocumentConsolidated saveSingleConsolidated() {
         final DocumentNode documentNode = documentNodeFactory.save();
         final DocumentMetadata documentMetadata = RandomObjectFiller.createAndFill(DocumentMetadata.class);
-        final DocumentConfiguration documentConfiguration =
-                RandomObjectFiller.createAndFill(DocumentConfiguration.class);
         DocumentConsolidated consolidated =
-                new DocumentConsolidated(documentMetadata, documentNode, documentConfiguration);
-        return documentConsolidatedRepository.save(consolidated);
+                new DocumentConsolidated(documentMetadata, documentNode);
+        final DocumentConsolidated saved = documentConsolidatedRepository.save(consolidated);
+        final DocumentConfiguration documentConfiguration = new DocumentConfiguration(true, true);
+        documentConfiguration.setDocumentConsolidated(saved);
+        final DocumentConfiguration savedConfig = documentConfigurationRepository.save(documentConfiguration);
+        saved.setDocumentConfiguration(savedConfig);
+        return saved;
     }
 }

@@ -1,5 +1,6 @@
 package com.code4ro.legalconsultation.document.node.mapper;
 
+import com.code4ro.legalconsultation.comment.model.persistence.CommentStatus;
 import com.code4ro.legalconsultation.comment.repository.CommentRepository;
 import com.code4ro.legalconsultation.document.node.model.dto.DocumentNodeDto;
 import com.code4ro.legalconsultation.document.node.model.persistence.DocumentNode;
@@ -16,7 +17,7 @@ public abstract class NumberOfCommentsMapper {
 
     @AfterMapping
     public void computeNumberOfComments(@MappingTarget DocumentNodeDto dto, DocumentNode model) {
-        dto.setNumberOfComments(commentRepository.countByDocumentNodeId(model.getId()));
+        dto.setNumberOfComments(commentRepository.countByDocumentNodeIdAndStatus(model.getId(), CommentStatus.APPROVED));
     }
 }
 

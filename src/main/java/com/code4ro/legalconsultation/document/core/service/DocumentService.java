@@ -1,7 +1,6 @@
 package com.code4ro.legalconsultation.document.core.service;
 
 import com.code4ro.legalconsultation.document.consolidated.model.dto.DocumentConsolidatedDto;
-import com.code4ro.legalconsultation.document.consolidated.model.dto.DocumentConsultationDataDto;
 import com.code4ro.legalconsultation.document.consolidated.model.persistence.DocumentConsolidated;
 import com.code4ro.legalconsultation.document.export.model.DocumentExportFormat;
 import com.code4ro.legalconsultation.document.metadata.model.dto.DocumentMetadataDto;
@@ -9,6 +8,7 @@ import com.code4ro.legalconsultation.document.metadata.model.dto.DocumentViewDto
 import com.code4ro.legalconsultation.document.metadata.model.persistence.DocumentMetadata;
 import com.code4ro.legalconsultation.pdf.model.dto.PdfHandleDto;
 import com.code4ro.legalconsultation.user.model.dto.UserDto;
+import com.code4ro.legalconsultation.user.model.persistence.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -55,8 +55,5 @@ public interface DocumentService {
 
     byte[] export(final UUID id, final DocumentExportFormat type);
 
-    void addConsultationData(final UUID id, final DocumentConsultationDataDto consultationDataDto);
-
-    DocumentConsultationDataDto getConsultationData(final UUID id);
-
+    List<UUID> getAllAssignedDocumentsNodeIds(User user);
 }

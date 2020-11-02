@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "document_nodes")
@@ -38,4 +39,11 @@ public class DocumentNode extends BaseEntity {
 
     @Column(name = "node_index")
     private Integer index;
+
+    public Stream<DocumentNode> flattened() {
+        return Stream.concat(
+                Stream.of(this),
+                children != null ? children.stream().flatMap(DocumentNode::flattened) : Stream.empty());
+    }
+
 }
