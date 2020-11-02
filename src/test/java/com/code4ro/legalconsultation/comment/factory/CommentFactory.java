@@ -1,12 +1,12 @@
 package com.code4ro.legalconsultation.comment.factory;
 
-import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDetailDto;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDto;
 import com.code4ro.legalconsultation.comment.model.persistence.Comment;
 import com.code4ro.legalconsultation.comment.model.persistence.CommentStatus;
 import com.code4ro.legalconsultation.comment.service.CommentService;
 import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
+import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,8 +32,8 @@ public final class CommentFactory {
         return commentService.create(nodeId, create());
     }
 
-    public void saveReply(final UUID parentId) {
-        commentService.createReply(parentId, create());
+    public CommentDetailDto saveReply(final UUID parentId) {
+        return commentService.createReply(parentId, create());
     }
 
     public Comment createEntity() {
