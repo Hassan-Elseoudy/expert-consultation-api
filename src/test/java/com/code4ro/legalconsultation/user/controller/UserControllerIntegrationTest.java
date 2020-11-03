@@ -2,6 +2,7 @@ package com.code4ro.legalconsultation.user.controller;
 
 import com.code4ro.legalconsultation.core.controller.AbstractControllerIntegrationTest;
 import com.code4ro.legalconsultation.core.factory.RandomObjectFiller;
+import com.code4ro.legalconsultation.invitation.repository.InvitationRepository;
 import com.code4ro.legalconsultation.user.model.dto.UserDto;
 import com.code4ro.legalconsultation.user.model.persistence.User;
 import com.code4ro.legalconsultation.user.model.persistence.UserRole;
@@ -32,8 +33,12 @@ public class UserControllerIntegrationTest extends AbstractControllerIntegration
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private InvitationRepository invitationRepository;
+
     @Before
     public void before() {
+        invitationRepository.deleteAll();
         userRepository.deleteAll();
         when(mailSender.createMimeMessage()).thenReturn(mock(MimeMessage.class));
     }
