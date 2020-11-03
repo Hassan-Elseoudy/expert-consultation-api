@@ -1,7 +1,6 @@
 package com.code4ro.legalconsultation.comment.controller;
 
 import com.code4ro.legalconsultation.authentication.model.persistence.ApplicationUser;
-import com.code4ro.legalconsultation.authentication.service.ApplicationUserService;
 import com.code4ro.legalconsultation.comment.factory.CommentFactory;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDetailDto;
 import com.code4ro.legalconsultation.comment.model.dto.CommentDto;

@@ -39,7 +39,7 @@ public class InvitationControllerTest extends AbstractControllerIntegrationTest 
     @Transactional
     public void testGetUsedInvitation() throws Exception {
         final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.USED);
         invitationRepository.save(invitation);
@@ -53,7 +53,7 @@ public class InvitationControllerTest extends AbstractControllerIntegrationTest 
     @Transactional
     public void testGetExpiredInvitation() throws Exception {
         final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.EXPIRED);
         invitationRepository.save(invitation);
@@ -67,7 +67,7 @@ public class InvitationControllerTest extends AbstractControllerIntegrationTest 
     @Transactional
     public void testGetInvitation() throws Exception {
         final User user = userRepository.save(Objects.requireNonNull(RandomObjectFiller.createAndFill(User.class)));
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.PENDING);
         invitationRepository.save(invitation);

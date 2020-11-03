@@ -8,7 +8,6 @@ import com.code4ro.legalconsultation.user.model.dto.UserDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter

@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-import static com.code4ro.legalconsultation.comment.model.persistence.CommentStatus.APPROVED;
-import static com.code4ro.legalconsultation.comment.model.persistence.CommentStatus.REJECTED;
-
 @RestController
 @RequestMapping("/api/documentnodes/{nodeId}/comments")
 @RequiredArgsConstructor

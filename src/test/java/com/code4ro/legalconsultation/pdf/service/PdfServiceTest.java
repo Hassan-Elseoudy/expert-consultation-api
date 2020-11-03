@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,8 +43,8 @@ public class PdfServiceTest {
 
         final UUID pdfHandleId = UUID.randomUUID();
         final String state = "abcdef";
-        final MultipartFile randomFile = PdfFileFactory
-                .getAsMultipart(getClass().getClassLoader());
+        final MultipartFile randomFile = Objects.requireNonNull(PdfFileFactory
+                .getAsMultipart(getClass().getClassLoader()));
         final String randomFilePath = "file:///" + randomFile.getOriginalFilename();
         assertThat(randomFile).isNotNull();
         Instant timestamp = Instant.now();

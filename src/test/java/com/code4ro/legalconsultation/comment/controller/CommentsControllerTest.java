@@ -24,6 +24,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -139,12 +140,12 @@ public class CommentsControllerTest extends AbstractControllerIntegrationTest {
     private ApplicationUser persistCurrentUser(final UserRole role) {
         final ApplicationUser applicationUser = userFactory.createApplicationUserWithRole(role);
         final User user = userRepository.save(applicationUser.getUser());
-        final Invitation invitation = RandomObjectFiller.createAndFill(Invitation.class);
+        final Invitation invitation = Objects.requireNonNull(RandomObjectFiller.createAndFill(Invitation.class));
         invitation.setUser(user);
         invitation.setStatus(InvitationStatus.PENDING);
         invitationRepository.save(invitation);
 
-        final SignUpRequest signUpRequest = RandomObjectFiller.createAndFill(SignUpRequest.class);
+        final SignUpRequest signUpRequest = Objects.requireNonNull(RandomObjectFiller.createAndFill(SignUpRequest.class));
         signUpRequest.setUsername("user");
         signUpRequest.setPassword("password");
         signUpRequest.setInvitationCode(invitation.getCode());
