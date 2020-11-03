@@ -15,7 +15,7 @@ public class UserEmailValidator implements ConstraintValidator<UniqueUserEmailCo
 
     @Override
     public void initialize(final UniqueUserEmailConstraint constraintAnnotation) {
-        throw new UnsupportedOperationException("Unsupported operation yet!");
+        // throw new UnsupportedOperationException("Unsupported operation yet!");
     }
 
     @Override
